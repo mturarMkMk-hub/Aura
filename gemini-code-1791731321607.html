@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA Beauty Atelier — Салон красоты премиум-класса</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        aura: {
+                            gold: '#C5A059',
+                            goldLight: '#DFBD7B',
+                            dark: '#1A1A1A',
+                            muted: '#666666',
+                            base: '#FBF9F6',
+                            card: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-aura-base text-aura-dark font-sans antialiased selection:bg-aura-gold selection:text-white">
+
+    <!-- НАВИГАЦИЯ -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="font-serif text-2xl font-bold tracking-wider text-aura-dark">
+                AURA <span class="text-aura-gold font-light">BEAUTY</span>
+            </a>
+
+            <!-- Десктоп меню -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#services" class="hover:text-aura-gold transition-colors">Услуги и цены</a>
+                <a href="#masters" class="hover:text-aura-gold transition-colors">Мастера</a>
+                <a href="#gallery" class="hover:text-aura-gold transition-colors">Галерея</a>
+                <a href="#reviews" class="hover:text-aura-gold transition-colors">Отзывы</a>
+                <a href="#contacts" class="hover:text-aura-gold transition-colors">Контакты</a>
+            </nav>
+
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="tel:+77010000000" class="text-sm font-semibold text-aura-dark hover:text-aura-gold transition-colors">
+                    <i class="fa-solid fa-phone text-aura-gold mr-2"></i>+7 (701) 000-00-00
+                </a>
+                <button onclick="openBookingModal()" class="bg-aura-gold hover:bg-aura-goldLight text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-lg">
+                    Записаться
+                </button>
+            </div>
+
+            <!-- Мобильная кнопка меню -->
+            <button id="mobileMenuBtn" class="md:hidden text-aura-dark text-xl p-2 focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Мобильное меню (выпадающее) -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-gray-100 px-4 pt-2 pb-6 space-y-3 shadow-lg">
+            <a href="#services" class="block py-2 font-medium border-b border-gray-50">Услуги и цены</a>
+            <a href="#masters" class="block py-2 font-medium border-b border-gray-50">Мастера</a>
+            <a href="#gallery" class="block py-2 font-medium border-b border-gray-50">Галерея</a>
+            <a href="#reviews" class="block py-2 font-medium border-b border-gray-50">Отзывы</a>
+            <a href="#contacts" class="block py-2 font-medium border-b border-gray-50">Контакты</a>
+            <div class="pt-2 flex flex-col space-y-3">
+                <a href="tel:+77010000000" class="text-sm font-semibold text-aura-dark">
+                    <i class="fa-solid fa-phone text-aura-gold mr-2"></i>+7 (701) 000-00-00
+                </a>
+                <button onclick="openBookingModal()" class="w-full bg-aura-gold text-white py-3 rounded-full font-medium shadow">
+                    Записаться онлайн
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ГЛАВНЫЙ ЭКРАН (HERO) -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden bg-gradient-to-b from-white to-aura-base">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6 text-center md:text-left">
+                <span class="inline-block uppercase tracking-widest text-xs font-semibold bg-aura-gold/10 text-aura-gold px-3 py-1 rounded-full">
+                    Премиальное пространство красоты
+                </span>
+                <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-aura-dark leading-tight">
+                    Подчеркните <br><span class="text-aura-gold italic">свою истинную</span> аристократичность
+                </h1>
+                <p class="text-aura-muted text-base sm:text-lg max-w-lg mx-auto md:mx-0">
+                    Авторские стрижки, сложное окрашивание, профессиональный уход и эстетика ногтевого сервиса в самом сердце города.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
+                    <button onclick="openBookingModal()" class="w-full sm:w-auto bg-aura-gold hover:bg-aura-goldLight text-white px-8 py-4 rounded-full font-medium transition-all shadow-lg hover:shadow-xl">
+                        Онлайн-бронирование
+                    </button>
+                    <a href="#services" class="w-full sm:w-auto border border-gray-300 hover:border-aura-gold text-aura-dark px-8 py-4 rounded-full font-medium transition-all text-center">
+                        Смотреть услуги
+                    </a>
+                </div>
+            </div>
+            <div class="relative flex justify-center">
+                <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=800" alt="Салон красоты AURA" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex items-end p-6">
+                        <div class="text-white">
+                            <p class="font-serif text-xl font-bold">AURA Beauty Atelier</p>
+                            <p class="text-xs text-gray-200">Искусство быть прекрасной каждый день</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- УСЛУГИ И ЦЕНЫ -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-aura-gold text-xs font-semibold uppercase tracking-widest">Прайс-лист</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-aura-dark mt-2">Наши услуги и цены</h2>
+                <p class="text-aura-muted text-sm mt-2">Выберите категорию и ознакомьтесь с полным спектром процедур</p>
+            </div>
+
+            <!-- Табы фильтрации услуг -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10" role="tablist">
+                <button onclick="filterServices('all')" class="service-tab bg-aura-gold text-white border border-aura-gold px-5 py-2 rounded-full text-sm font-medium transition-all" data-cat="all" aria-pressed="true">Все услуги</button>
+                <button onclick="filterServices('hair')" class="service-tab border border-gray-200 text-aura-dark px-5 py-2 rounded-full text-sm font-medium transition-all hover:border-aura-gold" data-cat="hair" aria-pressed="false">Парикмахерский зал</button>
+                <button onclick="filterServices('nails')" class="service-tab border border-gray-200 text-aura-dark px-5 py-2 rounded-full text-sm font-medium transition-all hover:border-aura-gold" data-cat="nails" aria-pressed="false">Ногтевой сервис</button>
+                <button onclick="filterServices('face')" class="service-tab border border-gray-200 text-aura-dark px-5 py-2 rounded-full text-sm font-medium transition-all hover:border-aura-gold" data-cat="face" aria-pressed="false">Уход за лицом</button>
+            </div>
+
+            <!-- Список услуг (карточки) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="servicesGrid">
+                <!-- Карточка 1 -->
+                <div class="service-card flex flex-col justify-between bg-aura-base rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-all" data-category="hair">
+                    <div>
+                        <div class="flex justify-between items-start gap-4 mb-3">
+                            <h3 class="font-serif text-lg font-bold text-aura-dark">Сложное окрашивание (Airtouch)</h3>
+                            <span class="text-aura-gold font-bold whitespace-nowrap">от 35 000 ₸</span>
+                        </div>
+                        <p class="text-aura-muted text-sm mb-4">Техника мягкого осветления с эффектом выгоревших прядей и плавным переходом.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-200/60">
+                        <span class="text-xs text-aura-muted"><i class="fa-regular fa-clock mr-1"></i> 3 - 4 часа</span>
+                        <button onclick="quickBook('Сложное окрашивание (Airtouch)')" class="text-xs font-semibold bg-aura-dark text-white px-4 py-2 rounded-full hover:bg-aura-gold transition-colors">Записаться</button>
+                    </div>
+                </div>
+
+                <!-- Карточка 2 -->
+                <div class="service-card flex flex-col justify-between bg-aura-base rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-all" data-category="hair">
+                    <div>
+                        <div class="flex justify-between items-start gap-4 mb-3">
+                            <h3 class="font-serif text-lg font-bold text-aura-dark">Женская модельная стрижка</h3>
+                            <span class="text-aura-gold font-bold whitespace-nowrap">12 000 ₸</span>
+                        </div>
+                        <p class="text-aura-muted text-sm mb-4">Консультация стилиста, мытье головы, уход, салонная укладка по форме.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-200/60">
+                        <span class="text-xs text-aura-muted"><i class="fa-regular fa-clock mr-1"></i> 1 час</span>
+                        <button onclick="quickBook('Женская модельная стрижка')" class="text-xs font-semibold bg-aura-dark text-white px-4 py-2 rounded-full hover:bg-aura-gold transition-colors">Записаться</button>
+                    </div>
+                </div>
+
+                <!-- Карточка 3 -->
+                <div class="service-card flex flex-col justify-between bg-aura-base rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-all" data-category="nails">
+                    <div>
+                        <div class="flex justify-between items-start gap-4 mb-3">
+                            <h3 class="font-serif text-lg font-bold text-aura-dark">Маникюр с покрытием гель-лак</h3>
+                            <span class="text-aura-gold font-bold whitespace-nowrap">9 500 ₸</span>
+                        </div>
+                        <p class="text-aura-muted text-sm mb-4">Комбинированный/аппаратный маникюр, выравнивание ногтевой пластины, стойкое покрытие.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-200/60">
+                        <span class="text-xs text-aura-muted"><i class="fa-regular fa-clock mr-1"></i> 1.5 часа</span>
+                        <button onclick="quickBook('Маникюр с покрытием гель-лак')" class="text-xs font-semibold bg-aura-dark text-white px-4 py-2 rounded-full hover:bg-aura-gold transition-colors">Записаться</button>
+                    </div>
+                </div>
+
+                <!-- Карточка 4 -->
+                <div class="service-card flex flex-col justify-between bg-aura-base rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-all" data-category="nails">
+                    <div>
+                        <div class="flex justify-between items-start gap-4 mb-3">
+                            <h3 class="font-serif text-lg font-bold text-aura-dark">Педикюр эстетический с покрытием</h3>
+                            <span class="text-aura-gold font-bold whitespace-nowrap">12 000 ₸</span>
+                        </div>
+                        <p class="text-aura-muted text-sm mb-4">Полный уход за стопами и пальчиками ног, покрытие гель-лаком премиум-бренда.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-200/60">
+                        <span class="text-xs text-aura-muted"><i class="fa-regular fa-clock mr-1"></i> 1 час 40 мин</span>
+                        <button onclick="quickBook('Педикюр эстетический с покрытием')" class="text-xs font-semibold bg-aura-dark text-white px-4 py-2 rounded-full hover:bg-aura-gold transition-colors">Записаться</button>
+                    </div>
+                </div>
+
+                <!-- Карточка 5 -->
+                <div class="service-card flex flex-col justify-between bg-aura-base rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-all" data-category="face">
+                    <div>
+                        <div class="flex justify-between items-start gap-4 mb-3">
+                            <h3 class="font-serif text-lg font-bold text-aura-dark">Чистка лица комбинированная</h3>
+                            <span class="text-aura-gold font-bold whitespace-nowrap">16 000 ₸</span>
+                        </div>
+                        <p class="text-aura-muted text-sm mb-4">Ультразвуковая и механическая очистка пор, успокаивающая маска, увлажнение.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-200/60">
+                        <span class="text-xs text-aura-muted"><i class="fa-regular fa-clock mr-1"></i> 1.5 часа</span>
+                        <button onclick="quickBook('Чистка лица комбинированная')" class="text-xs font-semibold bg-aura-dark text-white px-4 py-2 rounded-full hover:bg-aura-gold transition-colors">Записаться</button>
+                    </div>
+                </div>
+
+                <!-- Карточка 6 -->
+                <div class="service-card flex flex-col justify-between bg-aura-base rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-all" data-category="face">
+                    <div>
+                        <div class="flex justify-between items-start gap-4 mb-3">
+                            <h3 class="font-serif text-lg font-bold text-aura-dark">Уходовая программа «Сияние кожи»</h3>
+                            <span class="text-aura-gold font-bold whitespace-nowrap">20 000 ₸</span>
+                        </div>
+                        <p class="text-aura-muted text-sm mb-4">Пилинг мягкого действия, глубокое увлажнение сыворотками и лифтинг-массаж лица.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-200/60">
+                        <span class="text-xs text-aura-muted"><i class="fa-regular fa-clock mr-1"></i> 1 час</span>
+                        <button onclick="quickBook('Уходовая программа «Сияние кожи»')" class="text-xs font-semibold bg-aura-dark text-white px-4 py-2 rounded-full hover:bg-aura-gold transition-colors">Записаться</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- НАШИ МАСТЕРА -->
+    <section id="masters" class="py-20 bg-aura-base">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-aura-gold text-xs font-semibold uppercase tracking-widest">Профессионалы</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-aura-dark mt-2">Топ-мастера салона</h2>
+                <p class="text-aura-muted text-sm mt-2">Специалисты с многолетним опытом работы и регулярным повышением квалификации</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Мастер 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 text-center p-6 flex flex-col items-center">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-4 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Елена Смирнова" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-aura-dark">Елена Смирнова</h3>
+                    <p class="text-aura-gold text-xs font-semibold uppercase tracking-wider mb-3">Топ-колорист, стилист</p>
+                    <p class="text-aura-muted text-sm mb-6">Опыт работы: 9 лет. Эксперт в сложных техниках окрашивания и реконструкции волос.</p>
+                    <button onclick="bookWithMaster('Елена Смирнова')" class="mt-auto border border-aura-gold text-aura-dark hover:bg-aura-gold hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all">
+                        Записаться к мастеру
+                    </button>
+                </div>
+
+                <!-- Мастер 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 text-center p-6 flex flex-col items-center">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-4 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400" alt="Алина Ким" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-aura-dark">Алина Ким</h3>
+                    <p class="text-aura-gold text-xs font-semibold uppercase tracking-wider mb-3">Мастер ногтевого сервиса</p>
+                    <p class="text-aura-muted text-sm mb-6">Опыт работы: 6 лет. Безупречный комбинированный маникюр, дизайн и аккуратность.</p>
+                    <button onclick="bookWithMaster('Алина Ким')" class="mt-auto border border-aura-gold text-aura-dark hover:bg-aura-gold hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all">
+                        Записаться к мастеру
+                    </button>
+                </div>
+
+                <!-- Мастер 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 text-center p-6 flex flex-col items-center">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-4 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400" alt="София Васильева" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-aura-dark">София Васильева</h3>
+                    <p class="text-aura-gold text-xs font-semibold uppercase tracking-wider mb-3">Косметолог-эстетист</p>
+                    <p class="text-aura-muted text-sm mb-6">Опыт работы: 7 лет. Профессиональный уход за кожей лица, пилинги и современные методики.</p>
+                    <button onclick="bookWithMaster('София Васильева')" class="mt-auto border border-aura-gold text-aura-dark hover:bg-aura-gold hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all">
+                        Записаться к мастеру
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ГАЛЕРЕЯ РАБОТ -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-aura-gold text-xs font-semibold uppercase tracking-widest">Портфолио</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-aura-dark mt-2">Галерея наших работ</h2>
+                <p class="text-aura-muted text-sm mt-2">Результаты преображения гостей салона</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="aspect-square rounded-2xl overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=600" alt="Работа салона" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square rounded-2xl overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=600" alt="Работа салона" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square rounded-2xl overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=600" alt="Работа салона" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square rounded-2xl overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&q=80&w=600" alt="Работа салона" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ОТЗЫВЫ -->
+    <section id="reviews" class="py-20 bg-aura-base">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-aura-gold text-xs font-semibold uppercase tracking-widest">Мнения гостей</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-aura-dark mt-2">Отзывы клиентов</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-aura-gold text-sm mb-4">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-aura-dark font-serif italic mb-6">«Потрясающая атмосфера и уровень сервиса! Делала сложное окрашивание у Елены — результат превзошел все ожидания. Волосы живые и блестящие.»</p>
+                    </div>
+                    <div class="flex items-center space-x-3 pt-4 border-t border-gray-100">
+                        <div class="w-10 h-10 rounded-full bg-aura-gold/20 text-aura-gold font-bold flex items-center justify-center">Д</div>
+                        <div>
+                            <p class="font-semibold text-sm text-aura-dark">Динара Садыкова</p>
+                            <p class="text-xs text-aura-muted">Постоянный гость</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-aura-gold text-sm mb-4">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-aura-dark font-serif italic mb-6">«Хожу к Алине на маникюр. Всегда идеальная чистота, стерильные инструменты и потрясающая стойкость покрытия без единого скола!»</p>
+                    </div>
+                    <div class="flex items-center space-x-3 pt-4 border-t border-gray-100">
+                        <div class="w-10 h-10 rounded-full bg-aura-gold/20 text-aura-gold font-bold flex items-center justify-center">М</div>
+                        <div>
+                            <p class="font-semibold text-sm text-aura-dark">Марина Жукова</p>
+                            <p class="text-xs text-aura-muted">Постоянный гость</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-aura-gold text-sm mb-4">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-aura-dark font-serif italic mb-6">«Очень уютно, угостили вкусным кофе. Процедура чистки лица прошла комфортно, кожа сияет. Обязательно вернусь еще!»</p>
+                    </div>
+                    <div class="flex items-center space-x-3 pt-4 border-t border-gray-100">
+                        <div class="w-10 h-10 rounded-full bg-aura-gold/20 text-aura-gold font-bold flex items-center justify-center">А</div>
+                        <div>
+                            <p class="font-semibold text-sm text-aura-dark">Айгерим Касымова</p>
+                            <p class="text-xs text-aura-muted">Новый гость</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КОНТАКТЫ И АДРЕС -->
+    <section id="contacts" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-aura-gold text-xs font-semibold uppercase tracking-widest">Ждем вас</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-aura-dark mt-2">Контакты и адрес</h2>
+                        <p class="text-aura-muted text-sm mt-2">Свяжитесь с нами удобным способом или посетите наш салон</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-2xl bg-aura-base flex items-center justify-center text-aura-gold text-lg shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-aura-dark">Адрес салона</h3>
+                                <p class="text-aura-muted text-sm mt-1">г. Алматы, ул. Достык, 120 (БЦ «Kulen Plaza»)</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-2xl bg-aura-base flex items-center justify-center text-aura-gold text-lg shrink-0">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-aura-dark">Режим работы</h3>
+                                <p class="text-aura-muted text-sm mt-1">Ежедневно с 09:00 до 21:00 без выходных</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-2xl bg-aura-base flex items-center justify-center text-aura-gold text-lg shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-aura-dark">Телефон для связи</h3>
+                                <p class="text-aura-muted text-sm mt-1">+7 (701) 000-00-00 | +7 (727) 200-00-00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="openBookingModal()" class="bg-aura-gold hover:bg-aura-goldLight text-white px-8 py-4 rounded-full font-medium transition-all shadow-lg">
+                        Забронировать визит
+                    </button>
+                </div>
+
+                <!-- Блок карты -->
+                <div class="w-full h-[400px] rounded-3xl overflow-hidden shadow-md border border-gray-100 bg-gray-100 flex items-center justify-center relative">
+                    <iframe title="Карта проезда" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.697479633857!2d76.9452!3d43.2382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDE0JzE3LjUiTiA3NsKwNTYnNDMuMiJF!5e0!3m2!1sru!2skz!4v1650000000000!5m2!1sru!2skz" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ФУТЕР -->
+    <footer class="bg-aura-dark text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-center md:text-left">
+                <span class="font-serif text-2xl font-bold tracking-wider text-white">
+                    AURA <span class="text-aura-gold font-light">BEAUTY</span>
+                </span>
+                <p class="text-xs text-gray-400 mt-2">© 2026 AURA Beauty Atelier. Все права защищены.</p>
+            </div>
+            <div class="flex space-x-6 text-xl">
+                <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-aura-gold transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="Telegram" class="text-gray-400 hover:text-aura-gold transition-colors"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" aria-label="WhatsApp" class="text-gray-400 hover:text-aura-gold transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- МОДАЛЬНОЕ ОКНО ОНЛАЙН-БРОНИРОВАНИЯ -->
+    <div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <!-- Кнопка закрытия -->
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-gray-400 hover:text-aura-dark text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="font-serif text-2xl font-bold text-aura-dark mb-2">Онлайн-запись</h3>
+            <p class="text-xs text-aura-muted mb-6">Заполните шаги для бронирования вашего визита в салон</p>
+
+            <!-- Шаги индикатор -->
+            <div class="flex items-center justify-between mb-8 text-xs font-semibold text-aura-muted">
+                <div id="stepIndicator1" class="flex items-center space-x-2">
+                    <span class="w-7 h-7 rounded-full bg-aura-gold text-white flex items-center justify-center font-bold">1</span>
+                    <span class="hidden sm:inline">Услуга</span>
+                </div>
+                <div class="h-0.5 flex-1 bg-gray-200 mx-2"></div>
+                <div id="stepIndicator2" class="flex items-center space-x-2 opacity-50">
+                    <span class="w-7 h-7 rounded-full bg-gray-200 text-aura-dark flex items-center justify-center font-bold">2</span>
+                    <span class="hidden sm:inline">Мастер</span>
+                </div>
+                <div class="h-0.5 flex-1 bg-gray-200 mx-2"></div>
+                <div id="stepIndicator3" class="flex items-center space-x-2 opacity-50">
+                    <span class="w-7 h-7 rounded-full bg-gray-200 text-aura-dark flex items-center justify-center font-bold">3</span>
+                    <span class="hidden sm:inline">Время</span>
+                </div>
+                <div class="h-0.5 flex-1 bg-gray-200 mx-2"></div>
+                <div id="stepIndicator4" class="flex items-center space-x-2 opacity-50">
+                    <span class="w-7 h-7 rounded-full bg-gray-200 text-aura-dark flex items-center justify-center font-bold">4</span>
+                    <span class="hidden sm:inline">Контакты</span>
+                </div>
+            </div>
+
+            <!-- Шаг 1: Выбор услуги -->
+            <div id="bookingStep1" class="space-y-3">
+                <h4 class="font-semibold text-sm text-aura-dark mb-2">Выберите услугу:</h4>
+                <div class="space-y-2 max-h-60 overflow-y-auto pr-2">
+                    <label class="flex items-center justify-between p-3 rounded-xl border border-gray-200 hover:border-aura-gold cursor-pointer transition-all">
+                        <div class="flex items-center space-x-3">
+                            <input type="radio" name="booking_service" value="Сложное окрашивание (Airtouch)" class="text-aura-gold focus:ring-aura-gold" checked>
+                            <span class="text-sm font-medium">Сложное окрашивание (Airtouch)</span>
+                        </div>
+                        <span class="text-sm font-bold text-aura-gold">35 000 ₸</span>
+                    </label>
+                    <label class="flex items-center justify-between p-3 rounded-xl border border-gray-200 hover:border-aura-gold cursor-pointer transition-all">
+                        <div class="flex items-center space-x-3">
+                            <input type="radio" name="booking_service" value="Женская модельная стрижка" class="text-aura-gold focus:ring-aura-gold">
+                            <span class="text-sm font-medium">Женская модельная стрижка</span>
+                        </div>
+                        <span class="text-sm font-bold text-aura-gold">12 000 ₸</span>
+                    </label>
+                    <label class="flex items-center justify-between p-3 rounded-xl border border-gray-200 hover:border-aura-gold cursor-pointer transition-all">
+                        <div class="flex items-center space-x-3">
+                            <input type="radio" name="booking_service" value="Маникюр с покрытием гель-лак" class="text-aura-gold focus:ring-aura-gold">
+                            <span class="text-sm font-medium">Маникюр с покрытием гель-лак</span>
+                        </div>
+                        <span class="text-sm font-bold text-aura-gold">9 500 ₸</span>
+                    </label>
+                    <label class="flex items-center justify-between p-3 rounded-xl border border-gray-200 hover:border-aura-gold cursor-pointer transition-all">
+                        <div class="flex items-center space-x-3">
+                            <input type="radio" name="booking_service" value="Педикюр эстетический с покрытием" class="text-aura-gold focus:ring-aura-gold">
+                            <span class="text-sm font-medium">Педикюр эстетический с покрытием</span>
+                        </div>
+                        <span class="text-sm font-bold text-aura-gold">12 000 ₸</span>
+                    </label>
+                    <label class="flex items-center justify-between p-3 rounded-xl border border-gray-200 hover:border-aura-gold cursor-pointer transition-all">
+                        <div class="flex items-center space-x-3">
+                            <input type="radio" name="booking_service" value="Чистка лица комбинированная" class="text-aura-gold focus:ring-aura-gold">
+                            <span class="text-sm font-medium">Чистка лица комбинированная</span>
+                        </div>
+                        <span class="text-sm font-bold text-aura-gold">16 000 ₸</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Шаг 2: Выбор мастера -->
+            <div id="bookingStep2" class="space-y-3 hidden">
+                <h4 class="font-semibold text-sm text-aura-dark mb-2">Выберите специалиста:</h4>
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 rounded-xl border border-gray-200 hover:border-aura-gold cursor-pointer transition-all">
+                        <input type="radio" name="booking_master" value="Любой свободный мастер" class="text-aura-gold focus:ring-aura-gold mr-3" checked>
+                        <div>
+                            <p class="text-sm font-medium">Любой свободный мастер</p>
+                            <p class="text-xs text-aura-muted">Мы подберем для вас лучшего специалиста</p>
+                        </div>
+                    </label>
+                    <label class="flex items-center p-3 rounded-xl border border-gray-200 hover:border-aura-gold cursor-pointer transition-all">
+                        <input type="radio" name="booking_master" value="Елена Смирнова" class="text-aura-gold focus:ring-aura-gold mr-3">
+                        <div>
+                            <p class="text-sm font-medium">Елена Смирнова</p>
+                            <p class="text-xs text-aura-muted">Топ-колорист, стилист</p>
+                        </div>
+                    </label>
+                    <label class="flex items-center p-3 rounded-xl border border-gray-200 hover:border-aura-gold cursor-pointer transition-all">
+                        <input type="radio" name="booking_master" value="Алина Ким" class="text-aura-gold focus:ring-aura-gold mr-3">
+                        <div>
+                            <p class="text-sm font-medium">Алина Ким</p>
+                            <p class="text-xs text-aura-muted">Мастер ногтевого сервиса</p>
+                        </div>
+                    </label>
+                    <label class="flex items-center p-3 rounded-xl border border-gray-200 hover:border-aura-gold cursor-pointer transition-all">
+                        <input type="radio" name="booking_master" value="София Васильева" class="text-aura-gold focus:ring-aura-gold mr-3">
+                        <div>
+                            <p class="text-sm font-medium">София Васильева</p>
+                            <p class="text-xs text-aura-muted">Косметолог-эстетист</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Шаг 3: Выбор даты и времени -->
+            <div id="bookingStep3" class="space-y-4 hidden">
+                <div>
+                    <label class="block font-semibold text-sm text-aura-dark mb-1">Дата визита:</label>
+                    <input type="date" id="bookingDateInput" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-aura-gold">
+                </div>
+                <div>
+                    <label class="block font-semibold text-sm text-aura-dark mb-2">Доступное время:</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button type="button" onclick="selectTimeSlot(this)" class="time-slot-btn py-2 text-xs font-semibold rounded-xl border border-gray-200 hover:border-aura-gold transition-all" aria-pressed="false">10:00</button>
+                        <button type="button" onclick="selectTimeSlot(this)" class="time-slot-btn py-2 text-xs font-semibold rounded-xl border border-gray-200 hover:border-aura-gold transition-all" aria-pressed="false">12:00</button>
+                        <button type="button" onclick="selectTimeSlot(this)" class="time-slot-btn py-2 text-xs font-semibold rounded-xl border border-gray-200 hover:border-aura-gold transition-all" aria-pressed="false">14:30</button>
+                        <button type="button" onclick="selectTimeSlot(this)" class="time-slot-btn py-2 text-xs font-semibold rounded-xl border border-gray-200 hover:border-aura-gold transition-all" aria-pressed="false">16:00</button>
+                        <button type="button" onclick="selectTimeSlot(this)" class="time-slot-btn py-2 text-xs font-semibold rounded-xl border border-gray-200 hover:border-aura-gold transition-all" aria-pressed="false">18:00</button>
+                        <button type="button" onclick="selectTimeSlot(this)" class="time-slot-btn py-2 text-xs font-semibold rounded-xl border border-gray-200 hover:border-aura-gold transition-all" aria-pressed="false">19:30</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Шаг 4: Контактные данные -->
+            <div id="bookingStep4" class="space-y-4 hidden">
+                <div>
+                    <label class="block font-semibold text-sm text-aura-dark mb-1">Ваше имя:</label>
+                    <input type="text" id="clientName" placeholder="Например, Анна" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-aura-gold">
+                </div>
+                <div>
+                    <label class="block font-semibold text-sm text-aura-dark mb-1">Номер телефона:</label>
+                    <input type="tel" id="clientPhone" placeholder="+7 (700) 000-00-00" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-aura-gold">
+                </div>
+                <div>
+                    <label class="block font-semibold text-sm text-aura-dark mb-1">Комментарий (необязательно):</label>
+                    <textarea id="clientNotes" placeholder="Ваши пожелания к визиту" rows="2" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-aura-gold"></textarea>
+                </div>
+            </div>
+
+            <!-- Блок успешной заявки -->
+            <div id="bookingSuccess" class="hidden text-center py-6 space-y-4"></div>
+
+            <!-- Кнопки переключения шагов -->
+            <div id="modalControls" class="flex items-center justify-between mt-8 pt-4 border-t border-gray-100">
+                <button id="prevBtn" onclick="changeStep(-1)" class="px-5 py-2.5 rounded-full text-sm font-medium border border-gray-200 text-aura-dark hover:border-aura-dark transition-all disabled:opacity-30 disabled:cursor-not-allowed">Назад</button>
+                <button id="nextBtn" onclick="changeStep(1)" class="bg-aura-gold hover:bg-aura-goldLight text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-md">Далее</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключаем JS -->
+    <script src="script.js"></script>
+</body>
+</html>
