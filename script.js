@@ -1,3 +1,14 @@
+// ====== АДРЕС БЭКЕНДА ======
+// После публикации сервера (например, на Render) впишите его адрес сюда,
+// без слэша в конце. Пример: "https://aura-beauty-api.onrender.com"
+const PRODUCTION_API_URL = "";
+
+// Локально (Live Server, localhost) заявки уходят на http://localhost:3000,
+// на опубликованном сайте — на PRODUCTION_API_URL.
+const isLocalHost = ["localhost", "127.0.0.1", ""].includes(location.hostname);
+const API_URL = isLocalHost ? "https://backend-aura-bqca.onrender.com/" : PRODUCTION_API_URL;
+// ===========================
+
 // Состояние формы записи
 let currentStep = 1;
 let selectedTime = null;
@@ -268,8 +279,12 @@ function escapeHTML(value) {
     return String(value).replace(/[&<>"']/g, (char) => entities[char]);
 }
 
-// Проверка контактов и подготовка демонстрационной заявки
-function submitBooking() {
+let isSubmitting = false;
+
+// Проверка контактов и отправка заявки на сервер
+async function submitBooking() {
+    if (isSubmitting) return;
+
     const name = $("#clientName").value.trim();
     const phone = $("#clientPhone").value.trim();
 
@@ -306,7 +321,38 @@ function submitBooking() {
         notes
     };
 
-    console.log("Демонстрационная заявка:", request);
+    const nextButton = $("#nextBtn");
+    const defaultLabel = nextButton.textContent;
+
+    isSubmitting = true;
+    nextButton.disabled = true;
+    nextButton.textContent = "Отправляем...";
+
+    try {
+        const response = await fetch(`${API_URL}/api/bookings`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(request)
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || !result.ok) {
+            const message = Array.isArray(result.errors)
+                ? result.errors.join("\n")
+                : "Не удалось отправить заявку. Попробуйте позже.";
+
+            alert(message);
+            return;
+        }
+    } catch (error) {
+        alert("Нет связи с сервером. Проверьте интернет и попробуйте ещё раз.");
+        return;
+    } finally {
+        isSubmitting = false;
+        nextButton.disabled = false;
+        nextButton.textContent = defaultLabel;
+    }
 
     for (let i = 1; i <= 4; i++) {
         $(`#bookingStep${i}`).classList.add("hidden");
@@ -320,11 +366,11 @@ function submitBooking() {
         </div>
 
         <h4 class="font-serif text-3xl font-bold text-aura-dark">
-            Заявка подготовлена!
+            Заявка принята!
         </h4>
 
         <p class="text-sm text-aura-muted max-w-sm mx-auto">
-            Это демонстрационный режим. Заявка не отправлена салону. Для реальной записи необходимо подключить сервис отправки данных.
+            Мы свяжемся с вами по телефону, чтобы подтвердить запись.
         </p>
 
         <div class="text-sm text-left bg-aura-base rounded-xl p-4 space-y-2 max-w-md mx-auto">
