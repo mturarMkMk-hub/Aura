@@ -2,7 +2,8 @@
 let currentStep = 1;
 let selectedTime = null;
 
-const $ = (selector) => document.querySelector(selector); const $$ = (selector) => document.querySelectorAll(selector);
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => document.querySelectorAll(selector);
 
 const bookingModal = $("#bookingModal");
 const dateInput = $("#bookingDateInput");
@@ -34,9 +35,18 @@ function toggleMobileMenu() {
     $("#mobileMenu").classList.toggle("hidden");
 }
 
-$("#mobileMenuBtn").addEventListener("click", toggleMobileMenu);  // Закрываем мобильное меню после выбора раздела $$("#mobileMenu a[href^='#']").forEach((link) => {
+$("#mobileMenuBtn").addEventListener("click", toggleMobileMenu);
+
+// Закрываем мобильное меню после выбора раздела
+$$("#mobileMenu a[href^='#']").forEach((link) => {
     link.addEventListener("click", () => {
-        $("#mobileMenu").classList.add("hidden");     }); });  // Фильтрация услуг function filterServices(category) {     $$(".service-tab").forEach((tab) => {
+        $("#mobileMenu").classList.add("hidden");
+    });
+});
+
+// Фильтрация услуг
+function filterServices(category) {
+    $$(".service-tab").forEach((tab) => {
         const isActive = tab.dataset.cat === category;
 
         tab.classList.toggle("bg-aura-gold", isActive);
@@ -49,10 +59,61 @@ $("#mobileMenuBtn").addEventListener("click", toggleMobileMenu);  // Закры�
         tab.setAttribute("aria-pressed", String(isActive));
     });
 
-    $$(".service-card").forEach((card) => {         const visible =             category === "all" \vert{}\vert{}             card.dataset.category === category;          card.style.display = visible ? "flex" : "none";     }); }  // Работа с модальным окном function openBookingModal() {     bookingModal.classList.remove("hidden");     document.body.classList.add("modal-active");      setMinimumDate();     updateStepView(); }  function closeBookingModal() {     bookingModal.classList.add("hidden");     document.body.classList.remove("modal-active");      resetBookingForm(); }  // Закрытие клавишей Escape document.addEventListener("keydown", (event) => {     if (event.key === "Escape" &&         !bookingModal.classList.contains("hidden")) {         closeBookingModal();     } });  // Закрытие при нажатии на затемнённый фон bookingModal.addEventListener("click", (event) => {     if (event.target === bookingModal) {         closeBookingModal();     } });  // Нормализуем название услуги из карточки function quickBook(serviceName) {     const serviceAliases = {         "Сложное окрашивание (Airtouch / Balayage)":             "Сложное окрашивание (Airtouch)"     };      const targetService =         serviceAliases[serviceName] \vert{}\vert{} serviceName;      openBookingModal();      const radio = $$
-('input[name="booking_service"]');
+    $$(".service-card").forEach((card) => {
+        const visible =
+            category === "all" ||
+            card.dataset.category === category;
 
-    const matchingRadio = Array.from(radio).find(
+        card.style.display = visible ? "flex" : "none";
+    });
+}
+
+// Работа с модальным окном
+function openBookingModal() {
+    bookingModal.classList.remove("hidden");
+    document.body.classList.add("modal-active");
+
+    setMinimumDate();
+    updateStepView();
+}
+
+function closeBookingModal() {
+    bookingModal.classList.add("hidden");
+    document.body.classList.remove("modal-active");
+
+    resetBookingForm();
+}
+
+// Закрытие клавишей Escape
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" &&
+        !bookingModal.classList.contains("hidden")) {
+        closeBookingModal();
+    }
+});
+
+// Закрытие при нажатии на затемнённый фон
+bookingModal.addEventListener("click", (event) => {
+    if (event.target === bookingModal) {
+        closeBookingModal();
+    }
+});
+
+// Быстрая запись на услугу из карточки
+function quickBook(serviceName) {
+    const serviceAliases = {
+        "Сложное окрашивание (Airtouch / Balayage)":
+            "Сложное окрашивание (Airtouch)"
+    };
+
+    const targetService =
+        serviceAliases[serviceName] || serviceName;
+
+    openBookingModal();
+
+    const radios = $$('input[name="booking_service"]');
+
+    const matchingRadio = Array.from(radios).find(
         (item) => item.value === targetService
     );
 
@@ -69,8 +130,23 @@ function bookWithMaster(masterName) {
     openBookingModal();
 
     const radio = Array.from(
-        $$('input[name="booking_master"]')     ).find((item) => item.value === masterName);      if (radio) {         radio.checked = true;         currentStep = 2;     } else {         alert("Этот мастер пока не добавлен в список онлайн-записи.");         currentStep = 1;     }      updateStepView(); }  // Выбор времени function selectTimeSlot(button) {     $$
-(".time-slot-btn").forEach((item) => {
+        $$('input[name="booking_master"]')
+    ).find((item) => item.value === masterName);
+
+    if (radio) {
+        radio.checked = true;
+        currentStep = 2;
+    } else {
+        alert("Этот мастер пока не добавлен в список онлайн-записи.");
+        currentStep = 1;
+    }
+
+    updateStepView();
+}
+
+// Выбор времени
+function selectTimeSlot(button) {
+    $$(".time-slot-btn").forEach((item) => {
         item.classList.remove(
             "bg-aura-gold",
             "text-white",
@@ -179,6 +255,19 @@ function updateStepView() {
             : "Далее";
 }
 
+// Защита от вставки пользовательского текста как HTML
+function escapeHTML(value) {
+    const entities = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    };
+
+    return String(value).replace(/[&<>"']/g, (char) => entities[char]);
+}
+
 // Проверка контактов и подготовка демонстрационной заявки
 function submitBooking() {
     const name = $("#clientName").value.trim();
@@ -219,10 +308,9 @@ function submitBooking() {
 
     console.log("Демонстрационная заявка:", request);
 
-    $("#bookingStep1").classList.add("hidden");
-    $("#bookingStep2").classList.add("hidden");
-    $("#bookingStep3").classList.add("hidden");
-    $("#bookingStep4").classList.add("hidden");
+    for (let i = 1; i <= 4; i++) {
+        $(`#bookingStep${i}`).classList.add("hidden");
+    }
 
     const success = $("#bookingSuccess");
 
@@ -252,20 +340,6 @@ function submitBooking() {
     $("#modalControls").classList.add("hidden");
 }
 
-// Защита от вставки пользовательского текста как HTML
-function escapeHTML(value) {
-    return String(value).replace(/[&<>"']/g, (char) => {
-        const entities = {
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#39;"
-        };
-        return entities[char];
-    });
-}
-
 // Полный сброс формы
 function resetBookingForm() {
     currentStep = 1;
@@ -281,7 +355,9 @@ function resetBookingForm() {
 
     $("#clientName").value = "";
     $("#clientPhone").value = "";
-    $("#clientNotes").value = "";      $$(".time-slot-btn").forEach((button) => {
+    $("#clientNotes").value = "";
+
+    $$(".time-slot-btn").forEach((button) => {
         button.classList.remove(
             "bg-aura-gold",
             "text-white",
