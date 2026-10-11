@@ -1,7 +1,7 @@
 // ====== АДРЕС БЭКЕНДА ======
 // После публикации сервера (например, на Render) впишите его адрес сюда,
 // без слэша в конце. Пример: "https://aura-beauty-api.onrender.com"
-const PRODUCTION_API_URL = "";
+const PRODUCTION_API_URL = "https://backend-aura-bqca.onrender.com";
 
 // Локально (Live Server, localhost) заявки уходят на http://localhost:3000,
 // на опубликованном сайте — на PRODUCTION_API_URL.
